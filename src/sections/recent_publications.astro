@@ -1,0 +1,29 @@
+---
+import PageTitle from "../components/PageTitle.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+
+const dummyData = [
+  { title: "Publication 1", date: "210104" },
+  { title: "Publication 2", date: "210203" },
+  { title: "Publication 3", date: "210302" },
+  { title: "Publication 4", date: "210301" },
+];
+---
+
+<section id="recent-publications" class="flex flex-col">
+  <PageTitle text="recent_publications" />
+  <div class="flex flex-col">
+    {
+      dummyData.map((publication) => {
+        return (
+          <>
+            <PublicationCard
+              title={publication.title}
+              date={publication.date}
+            />
+          </>
+        );
+      })
+    }
+  </div>
+</section>

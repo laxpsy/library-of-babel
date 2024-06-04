@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 100 800;
+    src: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap";
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    @apply font-jetbrains text-base-text dark:text-dark-base-text;
+  }
+
+  body {
+    @apply bg-base-background dark:bg-dark-base-background text-sm;
+  }
+
+  @layer components {
+    .container {
+      @apply mx-auto w-[70%] md:w-[80%] p-4 bg-base-card dark:bg-dark-base-card flex flex-col gap-y-4;
+    }
+  }
+}

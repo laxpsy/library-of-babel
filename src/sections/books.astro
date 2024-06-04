@@ -1,0 +1,11 @@
+---
+import PageTitle from "../components/PageTitle.astro";
+import * as books from "../content/books/books.md";
+import Markdown from "../components/Markdown.astro";
+---
+
+<section id="links" class="flex flex-col">
+  <PageTitle text="books" />
+  <books.Content />
+  <div class="flex flex-col gap-y-2"></div>
+</section>

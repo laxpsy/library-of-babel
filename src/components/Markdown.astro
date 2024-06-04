@@ -1,0 +1,11 @@
+---
+// @ts-ignore - @astropub/md isn't recognised for some reason t_t
+import { Markdown } from "@astropub/md";
+const { content } = Astro.props as {
+  content: string;
+};
+---
+
+<div>
+  <Markdown of={content} />
+</div>

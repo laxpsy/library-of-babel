@@ -1,0 +1,13 @@
+---
+const { text } = Astro.props as {
+    text: string;
+};
+
+import DirectoryPrefix from "./DirectoryPrefix.astro";
+---
+<div class="flex flex-row justify-start text-xl">
+<DirectoryPrefix/>
+<h2 class = "font-bold decoration-gray-700">
+    {text}
+</h2>
+</div>

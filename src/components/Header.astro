@@ -1,0 +1,51 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
+import DirectoryPrefix from "./DirectoryPrefix.astro";
+const today = new Date();
+
+const navLinks = [
+  { href: "/meta", text: "meta" },
+  { href: "/library", text: "library" },
+  { href: "/publications", text: "publications" },
+];
+---
+
+<header
+  class="w-[70%] md:w-[80%] py-8 bg-base-background dark:bg-dark-base-background font-jetbrains"
+>
+  <div class="flex flex-row justify-between items-center">
+    <div class="flex flex-row justify-start items-center">
+      <div
+        class="hidden text-xl font-bold dark:text-base-text text-dark-base-text p-2 bg-base-highlight md:block"
+      >
+        <HeaderLink href="/">{"[" + SITE_TITLE + "]"}</HeaderLink>
+      </div>
+      <nav class="ml-6 flex flex-row gap-3">
+        {
+          navLinks.map((navLink) => {
+            return (
+              <>
+                <div class="flex flex-row justify-start text-lg items-center">
+                  <DirectoryPrefix />
+                  <HeaderLink href={navLink.href}>{navLink.text}</HeaderLink>
+                </div>
+              </>
+            );
+          })
+        }
+      </nav>
+    </div>
+    <div class="time hidden md:block text-neutral-700">
+      {today.getTime().toLocaleString("en-US")} elapsed since the epoch.
+    </div>
+  </div>
+</header>
+
+<script>
+  setInterval(() => {
+    document.querySelector(".time")!.textContent =
+      new Date().getTime().toLocaleString("en-US") +
+      " elpased since the epoch.";
+  }, 1);
+</script>
