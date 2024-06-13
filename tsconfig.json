@@ -2,5 +2,8 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strictNullChecks": true
-  }
+  },
+  "files": [
+    "node_modules/gsap/types/index.d.ts"
+  ]
 }

@@ -1,0 +1,15 @@
+---
+const { src, alt, title } = Astro.props as {
+	src: string;
+	alt: string;
+	title: string;
+};
+---
+
+<img
+	src={src}
+	alt={alt}
+	title={title}
+	loading="lazy"
+	class="mx-auto aspect-square size-10/12 md:size-3/12"
+/>

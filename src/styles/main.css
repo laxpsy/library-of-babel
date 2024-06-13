@@ -22,9 +22,78 @@
     @apply bg-base-background dark:bg-dark-base-background text-sm;
   }
 
+  h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
+    @apply content-['>>'] text-directory-prefix mr-2;  
+  }
+  h1 {
+    @apply text-2xl font-bold md:text-4xl;
+  }
+  h2 {
+    @apply text-xl font-bold md:text-3xl;
+  }
+  h3 {
+    @apply text-lg font-bold md:text-2xl;
+  }
+  h4 {
+    @apply text-sm font-bold md:text-xl;
+  }
+  h5 {
+    @apply text-sm font-bold md:text-lg;
+  }
+
+  h6 {
+    @apply font-bold;
+  }
+
+  img {
+    @apply border-2 border-black dark:border-white m-2;
+  }
+
+  blockquote {
+    @apply italic p-2 dark:bg-neutral-800 bg-slate-400;
+  }
+
+  blockquote * {
+    @apply text-base-highlight;
+  }
+
+  mark {
+    @apply bg-base-highlight dark:text-base-text text-dark-base-text;
+  }
+
+  code {
+    @apply font-jetbrains bg-neutral-900 p-1;
+  }
+
+table {
+  @apply w-max;
+}
+
+table * {
+  @apply m-3;
+}
+
+  th {
+    @apply border-b-[2px] border-base-highlight border-dashed;
+  }
+  pre {
+    @apply p-1;
+  }
+  pre code {
+    @apply bg-opacity-0 p-0;
+  }
+
+   kbd {
+    @apply bg-neutral-900 p-1;
+  }
+
+  .blog a {
+    @apply text-base-highlight;
+  }
+
   @layer components {
     .container {
-      @apply mx-auto w-[70%] md:w-[80%] p-4 bg-base-card dark:bg-dark-base-card flex flex-col gap-y-4;
+      @apply mx-auto w-[90%] md:w-[80%] p-4 bg-base-card dark:bg-dark-base-card flex flex-col gap-y-4;
     }
   }
 }

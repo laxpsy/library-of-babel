@@ -1,17 +1,16 @@
 ---
+import FormattedDate from './FormattedDate.astro';
 const { title, date, slug } = Astro.props as {
-  title: string;
-  date: string;
-  slug: string;
+	title: string;
+	date: string;
+	slug: string;
 };
 ---
 
-<div class="flex flex-row gap-x-1">
-  <p class="text-directory-prefix">
-    {date}
-  </p>
-  <p class="text-neutral-400">|</p>
-  <a href={slug}>
-    {title}
-  </a>
+<div class="flex flex-row justify-normal gap-x-2">
+	<FormattedDate date={new Date(date)} />
+	<p class="text-neutral-400">&gt;&gt;</p>
+	<a href={`publications/${slug}`} class="font-semibold text-base-highlight">
+		{title}
+	</a>
 </div>

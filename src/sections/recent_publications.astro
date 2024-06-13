@@ -1,29 +1,28 @@
 ---
-import PageTitle from "../components/PageTitle.astro";
-import PublicationCard from "../components/PublicationCard.astro";
+import { getCollection } from 'astro:content';
+import PageTitle from '../components/PageTitle.astro';
+import PublicationCard from '../components/PublicationCard.astro';
 
-const dummyData = [
-  { title: "Publication 1", date: "210104" },
-  { title: "Publication 2", date: "210203" },
-  { title: "Publication 3", date: "210302" },
-  { title: "Publication 4", date: "210301" },
-];
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <section id="recent-publications" class="flex flex-col">
-  <PageTitle text="recent_publications" />
-  <div class="flex flex-col">
-    {
-      dummyData.map((publication) => {
-        return (
-          <>
-            <PublicationCard
-              title={publication.title}
-              date={publication.date}
-            />
-          </>
-        );
-      })
-    }
-  </div>
+	<PageTitle text="recent_publications" />
+	<div class="flex flex-col">
+		{
+			posts.slice(0, 5).map((entry) => {
+				return (
+					<>
+						<PublicationCard
+							title={entry.data.title}
+							date={entry.data.pubDate}
+							slug={entry.slug}
+						/>
+					</>
+				);
+			})
+		}
+	</div>
 </section>

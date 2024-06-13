@@ -1,30 +1,30 @@
 ---
-import PageTitle from "../components/PageTitle.astro";
-import { REPO_LINK } from "../consts.ts";
+import PageTitle from '../components/PageTitle.astro';
+import { REPO_LINK } from '../consts.ts';
 ---
 
 <section id="about-the-website" class="flex flex-col">
-  <PageTitle text="about_the_website" />
-  <div class="flex flex-col gap-y-2">
-    <p>
-      good question. the website is built using <a
-        href="https://astro.build/"
-        target="_blank"
-        title="Astro"
-        class="bg-orange-400 text-base-text px-1">Astro</a
-      >, a front-end framework to built blazing fast static websites. the design
-      is recreated from scratch and has been heavily inspired from <span
-        class="italic">Astro Theme Cody</span
-      >.
-    </p>
-    <p>
-      the repository is available <a
-        href={REPO_LINK}
-        target="_blank"
-        title="Repoistory Link"
-        class="bg-base-highlight text-base-text px-1">here</a
-      >. i've tried my best to keep it easily editable and reusable. have a good
-      time!
-    </p>
-  </div>
+	<PageTitle text="about_the_website" />
+	<div class="flex flex-col gap-y-2">
+		<p>
+			good question. the website is built using <a
+				href="https://astro.build/"
+				target="_blank"
+				title="Astro"
+				class="bg-orange-400 px-1 text-base-text">Astro</a
+			>, a front-end framework to built blazing fast static websites. the design
+			is recreated from scratch and has been heavily inspired from <span
+				class="italic">Astro Theme Cody</span
+			>.
+		</p>
+		<p>
+			the repository is available <a
+				href={REPO_LINK}
+				target="_blank"
+				title="Repoistory Link"
+				class="bg-base-highlight px-1 text-base-text">here</a
+			>. i've tried my best to keep it easily editable and reusable. have a good
+			time!
+		</p>
+	</div>
 </section>

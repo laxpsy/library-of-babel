@@ -1,11 +1,38 @@
 ---
-import PageTitle from "../components/PageTitle.astro";
-import * as books from "../content/books/books.md";
-import Markdown from "../components/Markdown.astro";
+import PageTitle from '../components/PageTitle.astro';
+import { getCollection } from 'astro:content';
+const booksCollection = await getCollection('books');
 ---
 
 <section id="links" class="flex flex-col">
-  <PageTitle text="books" />
-  <books.Content />
-  <div class="flex flex-col gap-y-2"></div>
+	<PageTitle text="library" />
+	<div class="flex flex-col gap-y-1">
+		{
+			booksCollection.at(0)?.data.links.map((link) => {
+				return (
+					<div class="books flex flex-row gap-x-2">
+						<p class="text-neutral-500">&gt;&gt;</p>
+						<a
+							href={link.link}
+							class="font-semibold text-base-highlight underline-offset-4 hover:underline active:font-bold"
+							target="_blank"
+						>
+							{link.display_text}
+						</a>
+					</div>
+				);
+			})
+		}
+	</div>
 </section>
+
+<script>
+	import gsap from 'gsap';
+	gsap.from('.books', {
+		opacity: 0,
+		duration: 0.3,
+		y: 50,
+		ease: 'power2.out',
+		stagger: 0.1
+	});
+</script>

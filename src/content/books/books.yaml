@@ -1,0 +1,12 @@
+links: 
+- link: "https://rylev.github.io/DMG-01/public/book/"
+  display_text: "Making a Game Boy Emulator in Rust"
+- link: "https://raytracing.github.io/books/RayTracingInOneWeekend.html"
+  display_text: "Ray Tracing in One Weekend"
+- link: "https://aosabook.org/en/"
+  display_text: "AOSA"
+- link: "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+  display_text: "OSTEP"
+- link: "https://sadservers.com/"
+  display_text: "Sad Servers"
+

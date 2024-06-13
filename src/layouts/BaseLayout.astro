@@ -1,20 +1,20 @@
 ---
-import Header from "../components/Header.astro";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import Header from '../components/Header.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="relative flex h-full flex-col items-center">
-    <Header />
-    <main class="w-full overflow-hidden">
-      <slot />
-    </main>
-    <Footer />
-  </body>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="relative flex h-full flex-col items-center">
+		<Header />
+		<main class="w-full overflow-hidden">
+			<slot />
+		</main>
+		<Footer />
+	</body>
 </html>

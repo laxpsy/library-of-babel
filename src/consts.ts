@@ -1,4 +1,6 @@
 export const SITE_TITLE = "library of babel";
+export const SITE_TITLE_MOBILE = "babel";
+
 export const SITE_DESCRIPTION =
   "a personal curation and a blog to store and share knowledge.";
 export const GITHUB_LINK = "https://www.github.com/laxpsy";

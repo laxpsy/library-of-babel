@@ -1,51 +1,57 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
-import DirectoryPrefix from "./DirectoryPrefix.astro";
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE, SITE_TITLE_MOBILE } from '../consts';
+import DirectoryPrefix from './DirectoryPrefix.astro';
 const today = new Date();
 
 const navLinks = [
-  { href: "/meta", text: "meta" },
-  { href: "/library", text: "library" },
-  { href: "/publications", text: "publications" },
+	{ href: '/library', text: 'library' },
+	{ href: '/publications', text: 'publications' }
 ];
 ---
 
 <header
-  class="w-[70%] md:w-[80%] py-8 bg-base-background dark:bg-dark-base-background font-jetbrains"
+	class="w-[90%] bg-base-background py-6 font-jetbrains md:w-[80%] md:py-8 dark:bg-dark-base-background"
 >
-  <div class="flex flex-row justify-between items-center">
-    <div class="flex flex-row justify-start items-center">
-      <div
-        class="hidden text-xl font-bold dark:text-base-text text-dark-base-text p-2 bg-base-highlight md:block"
-      >
-        <HeaderLink href="/">{"[" + SITE_TITLE + "]"}</HeaderLink>
-      </div>
-      <nav class="ml-6 flex flex-row gap-3">
-        {
-          navLinks.map((navLink) => {
-            return (
-              <>
-                <div class="flex flex-row justify-start text-lg items-center">
-                  <DirectoryPrefix />
-                  <HeaderLink href={navLink.href}>{navLink.text}</HeaderLink>
-                </div>
-              </>
-            );
-          })
-        }
-      </nav>
-    </div>
-    <div class="time hidden md:block text-neutral-700">
-      {today.getTime().toLocaleString("en-US")} elapsed since the epoch.
-    </div>
-  </div>
+	<div class="flex flex-row items-center justify-center md:justify-between">
+		<div
+			class="justify-starts flex flex-col items-center gap-y-3 whitespace-nowrap md:flex-row md:gap-x-6"
+		>
+			<div
+				class="bg-base-highlight p-2 text-lg font-bold text-dark-base-text dark:text-base-text"
+			>
+				<HeaderLink href="/">{'[' + SITE_TITLE + ']'}</HeaderLink>
+			</div>
+			<!-- <div
+				class="bg-base-highlight p-2 text-lg font-bold text-dark-base-text md:hidden dark:text-base-text"
+			>
+				<HeaderLink href="/">{'[' + SITE_TITLE_MOBILE + ']'}</HeaderLink>
+			</div> -->
+			<nav class="flex w-full flex-row justify-start gap-x-3">
+				{
+					navLinks.map((navLink) => {
+						return (
+							<>
+								<div class="flex flex-row items-center justify-start text-lg">
+									<DirectoryPrefix />
+									<HeaderLink href={navLink.href}>{navLink.text}</HeaderLink>
+								</div>
+							</>
+						);
+					})
+				}
+			</nav>
+		</div>
+		<div class="time hidden text-neutral-700 md:block">
+			{today.getTime().toLocaleString('en-US')} elapsed since the epoch.
+		</div>
+	</div>
 </header>
 
 <script>
-  setInterval(() => {
-    document.querySelector(".time")!.textContent =
-      new Date().getTime().toLocaleString("en-US") +
-      " elpased since the epoch.";
-  }, 1);
+	setInterval(() => {
+		document.querySelector('.time')!.textContent =
+			new Date().getTime().toLocaleString('en-US') +
+			' elpased since the epoch.';
+	}, 1);
 </script>
