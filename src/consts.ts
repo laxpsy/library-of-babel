@@ -8,4 +8,4 @@ export const TWITTER_LINK = "https://www.twitter.com/laxpsy";
 export const MAILTO_LINK = "mailto:gujralanshg@gmail.com";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/ansh-gujral-9b2a7a23b/";
 export const LIBRARIAN = "Ansh Gujral";
-export const REPO_LINK = "";
+export const REPO_LINK = "https://github.com/laxpsy/Library-Of-Babel";
