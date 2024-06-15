@@ -10,6 +10,6 @@ links:
 - link: "https://sadservers.com/"
   display_text: "Sad Servers"
 - link: "https://samcurry.net/hacking-millions-of-modems"
-display_text: "Hacking Millions of Modems"
+  display_text: "Hacking Millions of Modems"
 - link: "https://github.com/alex/what-happens-when"
-display_text: "What Happens When"
+  display_text: "What Happens When"
