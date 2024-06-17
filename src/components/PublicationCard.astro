@@ -10,7 +10,7 @@ const { title, date, slug } = Astro.props as {
 <div class="flex flex-row justify-normal gap-x-2">
 	<FormattedDate date={new Date(date)} />
 	<p class="text-neutral-400">&gt;&gt;</p>
-	<a href={`publications/${slug}`} class="font-semibold text-base-highlight">
+	<a href={`publications/${slug}`} class="font-semibold text-base-highlight dark:text-dark-base-highlight">
 		{title}
 	</a>
 </div>
