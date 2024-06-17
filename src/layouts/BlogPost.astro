@@ -24,7 +24,7 @@ const { data } = Astro.props;
 					class="flex flex-col gap-y-3 font-semibold text-base-text dark:text-dark-base-text"
 				>
 					<p class="text-xl">{data.description}</p>
-					<FormattedDate date={data.pubDate} />
+					<FormattedDate date={data.pubDate} blog = {true}/>
 				</div>
 				<hr class="border-t-2 border-dashed border-directory-prefix" />
 				<slot />
