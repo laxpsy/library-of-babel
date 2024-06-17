@@ -1,10 +1,10 @@
 ---
 import { LIBRARIAN } from '../consts';
+const routeName = Astro.url.pathname.split('/')[1];
 ---
-
 <footer class="py-6 text-center text-lg">
-	<div class="flex flex-col">
-		<a href="/meta" class="pb-3">
+	<div class="flex flex-col gap-y-3">
+		<a href="/meta" class="">
 			librarian: <span
 				class=" bg-base-highlight dark:bg-dark-base-highlight p-1 font-bold text-dark-base-text dark:text-base-text"
 			>
@@ -17,5 +17,9 @@ import { LIBRARIAN } from '../consts';
 			href="https://genius.com/15502905"
 			title="hidden message">sahlo folina</a
 		>
+		{routeName == "library" && <p class="text-center text-sm opacity-30 dark:opacity-20">
+			all rights to the content in the library belong to their respective owners - this is a mere curation.
+		</p>}
 	</div>
 </footer>
+
