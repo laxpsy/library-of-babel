@@ -9,7 +9,7 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <section id="recent-publications" class="flex flex-col">
-	<PageTitle text="recent_publications" />
+	<PageTitle text="recent-publications" />
 	<div class="flex flex-col">
 		{
 			posts.slice(0, 5).map((entry) => {
