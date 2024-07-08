@@ -23,3 +23,5 @@ links:
   display_text: "Build Your Own X"
 - link: "https://crafters.io/"
   display_text: "Crafters.io"
+- link: "https://sockpuppet.org/blog/2014/02/25/safely-generate-random-numbers/"
+  display_text: "Generate Random Numbers"
