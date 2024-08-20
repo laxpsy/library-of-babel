@@ -2,7 +2,7 @@
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE, SITE_TITLE_MOBILE } from '../consts';
 import DirectoryPrefix from './DirectoryPrefix.astro';
-const today = new Date();
+var today = Date.now();
 
 const navLinks = [
 	{ href: '/library', text: 'library' },
@@ -43,15 +43,16 @@ const navLinks = [
 			</nav>
 		</div>
 		<div class="time hidden text-neutral-700 md:block">
-			{today.getTime().toLocaleString('en-US')} elapsed since the epoch.
+			{today} elapsed since the epoch.
 		</div>
 	</div>
 </header>
 
 <script>
+	var today = Date.now();
 	setInterval(() => {
 		document.querySelector('.time')!.textContent =
-			new Date().getTime().toLocaleString('en-US') +
+			(today++).toLocaleString('en-IN') +
 			' elpased since the epoch.';
 	}, 1);
 </script>
