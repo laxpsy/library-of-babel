@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # vscode specific
 .vscode/
+
+# obsidian
+.obsidian/
+
