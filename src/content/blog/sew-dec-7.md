@@ -1,7 +1,7 @@
 ---
 title: "Software Engineering Weekly | Dec 7: Investigating Regex Parsing"
 description: SEW (Software Engineering Weekly) is a blog series dedicated to exploring and sharing insights from the world of software engineering. Each week, I take a deep dive into a specific article, blog post, or research paper, providing a comprehensive summary and analysis. This series aims to keep myself updated on the latest trends, best practices, and innovative ideas in the field of software engineering. By documenting what I learn, I aim to keep myself accountable in the long run.
-pubDate: 07/12/2024
+pubDate: 12/7/2024
 ---
 # Investigating Regex Parsing
 Greetings. I'm gonna cheat a bit this week, write a longer blog and take a break next week. Sounds fair? We'll choose to ignore that I haven't published anything for over a month (hey, I had endsems!). Anyways, today's topic is going to be Regex Parsing. Before you scoff at me that who needs to learn Regex when you can just ask ChatGPT or Llama3.1 (I've been running models locally :)) to give you a RegExp for whatever needs to be parsed - yes. I'm quite aware of that fact. But, to quote Russ Cox - the technical lead at Google behind Golang. 
@@ -21,19 +21,19 @@ And thus, we come to *ReDOS*. Imagine that you've made the perfect website (with
 Our journey begins with a fork in the road. We'll travel the road taken by the most, and leave [the road not taken](https://www.poetryfoundation.org/poems/44272/the-road-not-taken) for awhile. I'm talking about implementation of the Regex parser, the way Perl and thus PCRE, Javascript, [Java 8](https://www.reddit.com/r/ProgrammerHumor/comments/1406j6i/java_21_will_introduce_unnamed_classes_and/) (fixed beyond Java 9), Python and most languages (except Golang and Rust, which we'll cover later) implement it is somewhat flawed - and there's a reason why. And, it has to do with the history and evolution of Regex :).
 
 To get started, I'll quote [Russ Cox's excellent article](https://swtch.com/~rsc/regexp/regexp1.html). 
->The simplest regular expression is a single literal character. Except for the special metacharacters `*+?()|`, characters match themselves. To match a metacharacter, escape it with a backslash: `\+` matches a literal plus character. Two regular expressions can be alternated or concatenated to form a new regular expression: if _e_1 matches _s_ and _e_2 matches _t_, then _e_1`|`_e_2 matches _s_ or _t_, and _e_1_e_2 matches _st_. The metacharacters `*`, `+`, and `?` are repetition operators: _e_1`*` matches a sequence of zero or more (possibly different) strings, each of which match _e_1; _e_1`+` matches one or more; _e_1`?` matches zero or one.
+>The simplest regular expression is a single literal character. Except for the special metacharacters `*+?()|`, characters match themselves. To match a metacharacter, escape it with a backslash: `\+` matches a literal plus character. Two regular expressions can be alternated or concatenated to form a new regular expression: if `e1` matches `s` and `e2` matches `t`, then `e1|e2` matches `s` or `t`, and `e1e2` matches `st`. The metacharacters `*`, `+`, and `?` are repetition operators: `e1*` matches a sequence of zero or more (possibly different) strings, each of which match `e1`; `e1+` matches one or more; `e1?` matches zero or one.
 
 Above mentioned syntax is a subset of the traditional Unix regular expressions syntax. Perl and TCL beyond added more and more operators and sequences - almost all of which can be well described by a combination of these metacharacters. TCL also introduced _backreferences_. Backreferences like `\1` or `\2` which reference the string matched by a previous paranthesized expression. For instance, `(dhsrtn|ansh)\1` matches `dhsrtndhsrtn` or `anshansh` but not `dhsrtnansh` or vice-versa. This _backreference_ support is the exact issue plaguing today's regular expressions 🙏.
 
 To give additional proof, here's a regular expression that matches `aaa...59` times using a regex of the form `a?a?...aaaa... 59 times each`.   
-![[comparison-of-pathological-regex.png]]The matching was done using [regex101.com](https://regex101.com/). The above given regex is an example of a _pathological regex_, which refers to the kind of expressions that most implementations are vulnerable to. Regex matching is done by converting the expression into finite-state automata (if you happened to complete your BTech in ECE from NITT, you'd know _sequence matching_ experiments. We're going to do exactly that), first - following which several possibilities exist. We'll go through all of them with detailed illustrations in the next section. 
+![comparison-of-pathological-regex.png](./sew-dec-7/comparison-of-pathological-regex.png)The matching was done using [regex101.com](https://regex101.com/). The above given regex is an example of a _pathological regex_, which refers to the kind of expressions that most implementations are vulnerable to. Regex matching is done by converting the expression into finite-state automata (if you happened to complete your BTech in ECE from NITT, you'd know _sequence matching_ experiments. We're going to do exactly that), first - following which several possibilities exist. We'll go through all of them with detailed illustrations in the next section. 
 
 ## A Class on Finite State Automata 
 > Finite State Machines or Finite State Automata are a mathematical model that represents a system with a limited number of states. FSMs are often used in computer science and engineering to design, analyze, and implement systems. 
 
 Basically, FSMs help us visualize a system with a finite number of states, and the corresponding transitions between the systems. For example, here's an FSM model of a machine that helps us parse the regex `a(bb)+a`. This regex matches `abba`, `abbbba`, `abbbbbba` and so on. To break it down, `a` exactly matches `a`, `(bb)+` matches 1 or more sets of `bb`, and then the ending `a` exactly matches an `a`. I'll try my best to explain the underlying theory and lead to better articles wherever possible.
 
-![[dfa-nfa.png]]
+![comparison-of-pathological-regex.png](./sew-dec-7/dfa-nfa.png)
 
 The DFA (_Deterministic Finite Automata_) described above has a deterministic response to each input it receives, at the initial stage `s1`, on receiving an `a`, it transitions into `s2`, then on receiving `b` it transitions into state `s3`, and so on. At `s4`, if it receives an `a`, it goes into `s5`, and if it receives a `b`, it transitions back to `s3`.  A DFA accounts for every possible state in a transition. 
 
@@ -42,7 +42,7 @@ The NFA (_Non Deterministic Finite Automata_) described is an equivalent but ind
 Both are equivalent as far as representing a machine is concerned. Why would you prefer one over the other? The answer is that NFAs are more compact, but require worse time complexities since you have to try additional paths, whereas DFAs require more space complexity since you have to express multiple states. Classic space v/s time tradeoff. 
 
 Ken Thompson, the man behind Regex as mentioned earlier - quoted a method to convert all regular expressions to their corresponding NFAs in his 1968 paper titled [Regular Expression Search Algorithm](https://www.oilshell.org/archive/Thompson-1968.pdf). Each NFA is built up from partial NFAs for each sub-expression. Don't worry if it seems very complicated, the accompanying description in plain-text should make it a bit easier.
-![[ken-thompson-nfa.png]].
+![comparison-of-pathological-regex.png](./sew-dec-7/ken-thompson-nfa.png).
 After building the automata, several algorithms exist. 
 - Try to convert it into a DFA, and pass the input to a DFA machine.
 - Try all possible paths in the NFA machine, _backtrack_ on failure.
@@ -52,10 +52,10 @@ After building the automata, several algorithms exist.
 The first two are problematic. For example, consider an example of `(0|1)*(0|1)(0|1)`. We'll make an NFA for that, followed by the corresponding DFA. 
 
 NFA
-![[nfa-example.png]]
+![comparison-of-pathological-regex.png](./sew-dec-7/nfa-example.png)
 
 DFA
-![[daf-example.png]]
+![comparison-of-pathological-regex.png](./sew-dec-7/dfa-example.png)
 See the exponential blow up in states? We went from 4 states, to 8. I'm cherry-picking a bad example here, for most cases the conversion will not result in so many states, but these corner-cases is what results in catastrophic failures. See this [Owen Stephen's article for more.](https://www.owenstephens.co.uk/blog/2014/09/28/NFA_DFA.html)
 
 Issue with the first algorithm is precisely this exponential blow-up in stages, and issue with the second algorithm is _exploring multiple paths_. A DFA is like a look-up table, whereas an NFA is like a recursion problem where you have to backtrack and explore multiple paths. With an NFA, you _cannot_ say that there's a match or there's no match without trying all possible paths. If you encounter a match early, good for you - or you'll be stuck trying paths again and again for a long time. At the same time, constructing an NFA is easier than constructing a DFA - NFAs are easier to understand and express the Regex pattern in a way that's very intuitive and easy to understand. Just see the above example.
