@@ -3,7 +3,7 @@ title: "Software Engineering Weekly | Nov 9: Amazon Firecracker"
 description: SEW (Software Engineering Weekly) is a blog series dedicated to exploring and sharing insights from the world of software engineering. Each week, I take a deep dive into a specific article, blog post, or research paper, providing a comprehensive summary and analysis. This series aims to keep myself updated on the latest trends, best practices, and innovative ideas in the field of software engineering. By documenting what I learn, I aim to keep myself accountable in the long run.
 pubDate: 09/11/2024
 ---
-# Week-1: Amazon Firecracker: Lightweight Virtualization
+# Amazon Firecracker: Lightweight Virtualization
 ## References 
 - https://www.usenix.org/system/files/nsdi20-paper-agache.pdf | Research Paper
 - https://github.com/firecracker-microvm/firecracker/tree/main | Firecracker Repo
