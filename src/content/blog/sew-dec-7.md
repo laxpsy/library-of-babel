@@ -50,7 +50,7 @@ The NFA (_Non Deterministic Finite Automata_) described is an equivalent but ind
 Both are equivalent as far as representing a machine is concerned. Why would you prefer one over the other? The answer is that NFAs are more compact, but require worse time complexities since you have to try additional paths, whereas DFAs require more space complexity since you have to express multiple states. Classic space v/s time tradeoff.
 
 Ken Thompson, the man behind Regex as mentioned earlier - quoted a method to convert all regular expressions to their corresponding NFAs in his 1968 paper titled [Regular Expression Search Algorithm](https://www.oilshell.org/archive/Thompson-1968.pdf). Each NFA is built up from partial NFAs for each sub-expression. Don't worry if it seems very complicated, the accompanying description in plain-text should make it a bit easier.
-![comparison-of-pathological-regex.png](/blog-images/sew-dec-7/ken-thompson-nfa.png).
+![comparison-of-pathological-regex.png](/blog-images/sew-dec-7/ken-thompson-nfa.png)
 After building the automata, several algorithms exist.
 
 - Try to convert it into a DFA, and pass the input to a DFA machine.
@@ -65,7 +65,7 @@ NFA
 
 DFA
 ![comparison-of-pathological-regex.png](/blog-images/sew-dec-7/dfa-example.png)
-See the exponential blow up in states? We went from 4 states, to 8. I'm cherry-picking a bad example here, for most cases the conversion will not result in so many states, but these corner-cases is what results in catastrophic failures. See this [Owen Stephen's article for more.](https://www.owenstephens.co.uk/blog/2014/09/28/NFA_DFA.html)
+Credits to Owen Stephen's article for the above two images. See the exponential blow up in states? We went from 4 states, to 8. I'm cherry-picking a bad example here, for most cases the conversion will not result in so many states, but these corner-cases is what results in catastrophic failures. See this [Owen Stephen's article for more.](https://www.owenstephens.co.uk/blog/2014/09/28/NFA_DFA.html)
 
 Issue with the first algorithm is precisely this exponential blow-up in stages, and issue with the second algorithm is _exploring multiple paths_. A DFA is like a look-up table, whereas an NFA is like a recursion problem where you have to backtrack and explore multiple paths. With an NFA, you _cannot_ say that there's a match or there's no match without trying all possible paths. If you encounter a match early, good for you - or you'll be stuck trying paths again and again for a long time. At the same time, constructing an NFA is easier than constructing a DFA - NFAs are easier to understand and express the Regex pattern in a way that's very intuitive and easy to understand. Just see the above example.
 
