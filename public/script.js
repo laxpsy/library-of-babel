@@ -79,5 +79,5 @@ function handleNoClick() {
 }
 
 function handleYesClick() {
-	window.location.href = 'aadit-server/yes-page';
+	console.log('yessed');
 }
